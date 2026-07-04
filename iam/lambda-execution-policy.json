@@ -1,0 +1,78 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowSNSAlerts",
+            "Effect": "Allow",
+            "Action": "sns:Publish",
+            "Resource": [
+                "arn:aws:sns:ap-south-2:084149021663:critical-alerts",
+                "arn:aws:sns:ap-south-2:084149021663:high-alerts",
+                "arn:aws:sns:ap-south-2:084149021663:medium-alerts"
+            ]
+        },
+        {
+            "Sid": "AllowCloudTrailRemediation",
+            "Effect": "Allow",
+            "Action": [
+                "cloudtrail:StartLogging",
+                "cloudtrail:GetTrailStatus"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowIAMRemediation",
+            "Effect": "Allow",
+            "Action": [
+                "iam:DetachUserPolicy",
+                "iam:ListAttachedUserPolicies",
+                "iam:UpdateAccessKey",
+                "iam:ListAccessKeys"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowS3Remediation",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutPublicAccessBlock",
+                "s3:GetPublicAccessBlock"
+            ],
+            "Resource": "arn:aws:s3:::*"
+        },
+        {
+            "Sid": "AllowEC2Remediation",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:RevokeSecurityGroupIngress",
+                "ec2:DescribeSecurityGroups"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowCloudWatchLogs",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:ap-south-2:084149021663:log-group:/aws/lambda/threat-detection-engine:*"
+        },
+        {
+            "Sid": "AllowDynamoDB",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:PutItem",
+                "dynamodb:GetItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:Query",
+                "dynamodb:Scan"
+            ],
+            "Resource": [
+                "arn:aws:dynamodb:ap-south-2:084149021663:table/incident-log",
+                "arn:aws:dynamodb:ap-south-2:084149021663:table/recon-counter"
+            ]
+        }
+    ]
+}

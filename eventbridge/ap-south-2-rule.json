@@ -1,0 +1,4 @@
+{
+  "source": ["aws.iam", "aws.signin", "aws.cloudtrail", "aws.s3", "aws.ec2", "aws.secretsmanager"],
+  "detail-type": ["AWS API Call via CloudTrail", "AWS Console Sign In via CloudTrail"]
+}

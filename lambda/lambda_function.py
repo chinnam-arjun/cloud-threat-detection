@@ -1,14 +1,16 @@
 import json
 import boto3
+import os
 import uuid
 from datetime import datetime, timezone, timedelta
 
 # ──────────────────────────────────────────────
 # CONFIG — Replace with your actual ARNs
 # ──────────────────────────────────────────────
-SNS_CRITICAL = "arn:aws:sns:ap-south-2:084149021663:critical-alerts"
-SNS_HIGH     = "arn:aws:sns:ap-south-2:084149021663:high-alerts"
-SNS_MEDIUM   = "arn:aws:sns:ap-south-2:084149021663:medium-alerts"
+
+SNS_CRITICAL = os.environ['SNS_CRITICAL_ARN']
+SNS_HIGH     = os.environ['SNS_HIGH_ARN']
+SNS_MEDIUM   = os.environ['SNS_MEDIUM_ARN']
 
 SNS_TOPIC_MAP = {
     "CRITICAL" : SNS_CRITICAL,

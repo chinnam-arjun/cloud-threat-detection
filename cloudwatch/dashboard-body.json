@@ -1,0 +1,105 @@
+{
+    "widgets": [
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 0,
+            "width": 24,
+            "height": 6,
+            "properties": {
+                "title": "Threat Detections",
+                "metrics": [
+                    [ "AWS/Lambda", "Invocations", "FunctionName", "threat-detection-engine", { "stat": "Sum", "period": 300, "label": "Threat Detections" } ]
+                ],
+                "view": "timeSeries",
+                "region": "ap-south-2"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 6,
+            "width": 8,
+            "height": 4,
+            "properties": {
+                "title": "Lambda Errors (last 1hr)",
+                "metrics": [
+                    [ "AWS/Lambda", "Errors", "FunctionName", "threat-detection-engine", { "stat": "Sum", "period": 3600, "label": "Errors" } ]
+                ],
+                "view": "singleValue",
+                "region": "ap-south-2"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 8,
+            "y": 6,
+            "width": 8,
+            "height": 4,
+            "properties": {
+                "title": "Avg Response Time (ms)",
+                "metrics": [
+                    [ "AWS/Lambda", "Duration", "FunctionName", "threat-detection-engine", { "stat": "Average", "period": 3600, "label": "Duration" } ]
+                ],
+                "view": "singleValue",
+                "region": "ap-south-2"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 16,
+            "y": 6,
+            "width": 8,
+            "height": 4,
+            "properties": {
+                "title": "Alerts Sent by Severity",
+                "metrics": [
+                    [ "AWS/SNS", "NumberOfNotificationsDelivered", "TopicName", "critical-alerts", { "stat": "Sum", "period": 86400, "label": "CRITICAL" } ],
+                    [ "AWS/SNS", "NumberOfNotificationsDelivered", "TopicName", "high-alerts", { "stat": "Sum", "period": 86400, "label": "HIGH" } ],
+                    [ "AWS/SNS", "NumberOfNotificationsDelivered", "TopicName", "medium-alerts", { "stat": "Sum", "period": 86400, "label": "MEDIUM" } ]
+                ],
+                "view": "bar",
+                "region": "ap-south-2"
+            }
+        },
+        {
+            "type": "log",
+            "x": 0,
+            "y": 10,
+            "width": 12,
+            "height": 6,
+            "properties": {
+                "title": "Recent Security Events",
+                "query": "SOURCE \"CloudTrail-Logs\" | fields eventTime, eventName, userIdentity.userName, sourceIPAddress, awsRegion, errorCode | filter eventSource in [\"iam.amazonaws.com\", \"cloudtrail.amazonaws.com\", \"signin.amazonaws.com\", \"s3.amazonaws.com\", \"ec2.amazonaws.com\"] | sort eventTime desc | limit 20",
+                "region": "ap-south-2",
+                "view": "table"
+            }
+        },
+        {
+            "type": "log",
+            "x": 12,
+            "y": 10,
+            "width": 12,
+            "height": 6,
+            "properties": {
+                "title": "Threats Detected",
+                "query": "SOURCE \"/aws/lambda/threat-detection-engine\" | fields @timestamp, @message | filter @message like \"THREAT DETECTED\" | sort @timestamp desc | limit 20",
+                "region": "ap-south-2",
+                "view": "table"
+            }
+        },
+        {
+            "type": "log",
+            "x": 0,
+            "y": 16,
+            "width": 24,
+            "height": 6,
+            "properties": {
+                "title": "AccessDenied Recon Activity (5min buckets)",
+                "query": "SOURCE \"CloudTrail-Logs\" | fields eventTime, userIdentity.userName, sourceIPAddress | filter errorCode = \"AccessDenied\" | stats count(*) as denied_count by bin(5m) | sort eventTime desc",
+                "region": "ap-south-2",
+                "view": "timeSeries"
+            }
+        }
+    ]
+}

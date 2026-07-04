@@ -1,0 +1,25 @@
+{
+  "source": "aws.cloudtrail",
+  "detail-type": "AWS API Call via CloudTrail",
+  "detail": {
+    "eventVersion": "1.08",
+    "eventName": "StopLogging",
+    "eventSource": "cloudtrail.amazonaws.com",
+    "awsRegion": "ap-south-2",
+    "eventTime": "2026-07-03T10:00:00Z",
+    "sourceIPAddress": "1.2.3.4",
+    "userAgent": "aws-cli/2.0",
+    "userIdentity": {
+      "type": "IAMUser",
+      "principalId": "AIDARHF5MFPP7YMTIE57P",
+      "arn": "arn:aws:iam::YOUR_ACCOUNT_ID:user/YOUR_USERNAME",
+      "accountId": "YOUR_ACCOUNT_ID",
+      "userName": "YOUR_USERNAME"
+    },
+    "requestParameters": {
+      "name": "cloud-threat-detection-trail"
+    },
+    "responseElements": null,
+    "recipientAccountId": "YOUR_ACCOUNT_ID"
+  }
+}

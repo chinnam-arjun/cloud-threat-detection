@@ -1,0 +1,10 @@
+{
+  "TableName": "recon-counter",
+  "AttributeDefinitions": [
+    { "AttributeName": "actor", "AttributeType": "S" }
+  ],
+  "KeySchema": [
+    { "AttributeName": "actor", "KeyType": "HASH" }
+  ],
+  "BillingMode": "PAY_PER_REQUEST"
+}

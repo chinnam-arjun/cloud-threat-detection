@@ -1,0 +1,28 @@
+{
+  "source": "aws.signin",
+  "detail-type": "AWS Console Sign In via CloudTrail",
+  "detail": {
+    "eventVersion": "1.08",
+    "eventName": "ConsoleLogin",
+    "eventSource": "signin.amazonaws.com",
+    "awsRegion": "ap-south-2",
+    "eventTime": "2026-07-03T10:00:00Z",
+    "sourceIPAddress": "1.2.3.4",
+    "userAgent": "Mozilla/5.0",
+    "userIdentity": {
+      "type": "Root",
+      "principalId": "YOUR_ACCOUNT_ID",
+      "arn": "arn:aws:iam::YOUR_ACCOUNT_ID:root",
+      "accountId": "YOUR_ACCOUNT_ID"
+    },
+    "additionalEventData": {
+      "LoginTo": "https://console.aws.amazon.com/",
+      "MobileVersion": "No",
+      "MFAUsed": "No"
+    },
+    "responseElements": {
+      "ConsoleLogin": "Success"
+    },
+    "recipientAccountId": "YOUR_ACCOUNT_ID"
+  }
+}
